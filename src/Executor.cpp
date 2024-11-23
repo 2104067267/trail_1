@@ -11,19 +11,20 @@ bool operator ==(const Pose& poseA,const Pose& poseB) {
 Executor* Executor::NewExecutor(const Pose &myPose) {
     auto* p=new Executor();
     p->pose=myPose;
+    InitIndex(p ,myPose);
     return p;
 }
 
 //转向
-void Executor::Execute(const std::string& command){
-    for(int i=0;command[i]!='\0';i++){
-        if (command[i] == 'M') {
+void Executor::Execute(const std::string& commands){
+    for(int i=0;commands[i]!='\0';i++){
+        if (commands[i] == 'M') {
               MoveForward();
         }
-        else if (command[i] =='L'){
+        else if (commands[i] =='L'){
               TurnLeft();
         }
-        else if (command[i] == 'R'){
+        else if (commands[i] == 'R'){
               TurnRight();
         }
         else {
@@ -32,8 +33,7 @@ void Executor::Execute(const std::string& command){
     }
 }
 
- Pose Executor:: Query(){
-     //std:: cout<<"("<<this->pose.x<<","<<this->pose.y<<","<<this->pose.heading<<")"<<std::endl;
+Pose Executor:: Query(){
      return this->pose;
 }
 
@@ -48,22 +48,22 @@ void Executor:: MoveForward(){
 }
 
 void Executor:: TurnLeft(){
-    switch (this->pose.heading) {
-    case 'N': this->pose.heading = 'W'; break;
-    case 'E': this->pose.heading = 'N'; break;
-    case 'S': this->pose.heading = 'E'; break;
-    case 'W': this->pose.heading = 'S'; break;
-    default : break;
-    }
+      if(index==0)index=3;
+      else index--;
+      pose.heading=directions[index];
 }
 
 void Executor:: TurnRight(){
-    switch (this->pose.heading) {
-    case 'N': this->pose.heading = 'E'; break;
-    case 'E': this->pose.heading = 'S'; break;
-    case 'S': this->pose.heading = 'W'; break;
-    case 'W': this->pose.heading = 'N'; break;
-    default : break;
+      if(index==3)index=0;
+      else index++;
+      pose.heading=directions[index];
+}
+
+void Executor:: InitIndex( Executor* &p ,const Pose &myPose){
+    for(int i=0;i<4;i++){
+        if(p->directions[i]!=myPose.heading)continue;
+        p->index=i;
+        break;
     }
 }
 

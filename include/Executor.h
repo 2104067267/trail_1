@@ -12,11 +12,14 @@ struct Pose {        //在计算和计算机视觉领域，pose (或 spatial pos
 
 bool  operator ==(const Pose& poseA,const Pose& poseB) ;
 
+
 class Executor    //抽象类，提供接口定义，隐藏功能实现细节
 {
 public:
     //static: 表明为静态成员函数； Executor* :表明返回类型是一个类指针 NewExecutor是函数名； {}表示是一个参数列表；
     static Executor* NewExecutor(const Pose& myPose = {0, 0,'N'});
+    //
+    static void InitIndex(Executor* &p ,const Pose & myPose);
     //默认构造函数
     Executor(void) = default;  // =default简化代码，明确表示使用编译器生成的默认实现
     //虚构函数
@@ -28,7 +31,7 @@ public:
     //拷贝赋值运算；  ClassName& operator = (const ClassName & other) {}
     Executor& operator=(const Executor&) = delete;
     //virtual: 关键字表示该函数是一个虚函数，允许在派生类中进行重写
-    virtual void Execute(const std::string& command);
+    virtual void Execute(const std::string& commands);
     //查询
     virtual Pose Query();
     //左转
@@ -40,6 +43,8 @@ public:
 
 private:
     Pose pose;
+    int index=0;
+    char directions[4]={'N','E','S','W'};
 };
 
 }
