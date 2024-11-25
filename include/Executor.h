@@ -3,31 +3,32 @@
 #include<iostream>
 namespace adas       //namespace//：组织代码并防止命名冲突，使代码更易于管理和阅读
 {
-struct Pose {        //在计算和计算机视觉领域，pose (或 spatial pose) 表示物体的位置和方向
-    int x;           // 定义结构体，便于数据的组织和传递
+//基数
+struct Pose {
+    int x;
     int y;
     char heading;
 };
-
-
+//Pose的判别等于运算符重载
 bool  operator ==(const Pose& poseA,const Pose& poseB) ;
 
-class Executor    //抽象类，提供接口定义，隐藏功能实现细节
+//指令类
+class Executor
 {
 public:
-    //static: 表明为静态成员函数； Executor* :表明返回类型是一个类指针 NewExecutor是函数名； {}表示是一个参数列表；
+    //带参构造
     static Executor* NewExecutor(const Pose& myPose = {0, 0,'N'});
-    //
+    //初始index成员变量
     static void InitIndex(Executor* &p ,const Pose & myPose);
     //默认构造函数
     Executor();
     //虚构函数
     virtual ~Executor(void)=default;
-
+    //禁用拷贝构造
     Executor(const Executor&) = delete;
-
+    //禁用赋值构造
     Executor& operator=(const Executor&) = delete;
-    //virtual: 关键字表示该函数是一个虚函数，允许在派生类中进行重写
+    //执行指令
     virtual void Execute(const std::string& commands);
     //查询
     virtual Pose Query();
@@ -40,8 +41,8 @@ public:
 
 private:
     Pose pose{};
-    int index=0;
-    static char directions[4];
+    int index=0;                //列表下标
+    static char directions[4];  //方向参数列表
 };
 
 }

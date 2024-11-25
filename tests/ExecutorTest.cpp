@@ -2,6 +2,7 @@
 #include"Executor.h"
 namespace adas
 {
+//"MRMMRLL"
 TEST(ExecutorTest,should_return_facing_N21_given_command_is_RMRM_and_facing_is_N)
 {
     std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
@@ -10,6 +11,7 @@ TEST(ExecutorTest,should_return_facing_N21_given_command_is_RMRM_and_facing_is_N
     ASSERT_EQ(target, executor->Query());
 }
 
+//"RMRMMLLR"
 TEST(ExecutorTest,should_return_facing_E1n2_given_command_is_RMRM_and_facing_is_N)
 {
     std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
@@ -18,6 +20,7 @@ TEST(ExecutorTest,should_return_facing_E1n2_given_command_is_RMRM_and_facing_is_
     ASSERT_EQ(target, executor->Query());
 }
 
+//"MMRMMRLRLL"
 TEST(ExecutorTest,should_return_facing_N22_given_command_is_RMRM_and_facing_is_N)
 {
     std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
