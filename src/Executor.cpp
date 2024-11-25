@@ -6,6 +6,7 @@ namespace adas {
 bool operator ==(const Pose& poseA,const Pose& poseB) {
     return (poseA.x == poseB.x) && (poseA.y == poseB.y) && (poseA.heading == poseB.heading);
 }
+char Executor:: directions[4]={'N','E','S','W'};
 
 //构造
 Executor* Executor::NewExecutor(const Pose &myPose) {
@@ -18,9 +19,9 @@ Executor* Executor::NewExecutor(const Pose &myPose) {
 Executor:: Executor(){
     pose={0,0,'N'};
     index=0;
-}
 
-//转向
+}
+//转向4
 void Executor::Execute(const std::string& commands){
     for(int i=0;commands[i]!='\0';i++){
         if (commands[i] == 'M') {

@@ -9,6 +9,7 @@ struct Pose {        //在计算和计算机视觉领域，pose (或 spatial pos
     char heading;
 };
 
+
 bool  operator ==(const Pose& poseA,const Pose& poseB) ;
 
 class Executor    //抽象类，提供接口定义，隐藏功能实现细节
@@ -40,7 +41,7 @@ public:
 private:
     Pose pose{};
     int index=0;
-    char directions[4]={'N','E','S','W'};
+    static char directions[4];
 };
 
 }
