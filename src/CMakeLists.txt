@@ -10,6 +10,7 @@ ADD_LIBRARY(training ${SOURCE}
         ../include/Executor.h
         ../include/Executor.h
         Executor.cpp
+        ../include/hello.h
 )
 
 TARGET_INCLUDE_DIRECTORIES(training PUBLIC "${INCLUDE}")

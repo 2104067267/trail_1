@@ -15,6 +15,11 @@ Executor* Executor::NewExecutor(const Pose &myPose) {
     return p;
 }
 
+Executor:: Executor(){
+    pose={0,0,'N'};
+    index=0;
+}
+
 //转向
 void Executor::Execute(const std::string& commands){
     for(int i=0;commands[i]!='\0';i++){
@@ -47,17 +52,16 @@ void Executor:: MoveForward(){
     }
 }
 
-void Executor:: TurnLeft(){
-      if(index==0)index=3;
-      else index--;
-      pose.heading=directions[index];
+void Executor::TurnLeft() {
+    index = (index - 1 + 4) % 4;
+    pose.heading = directions[index];
 }
 
-void Executor:: TurnRight(){
-      if(index==3)index=0;
-      else index++;
-      pose.heading=directions[index];
+void Executor::TurnRight() {
+    index = (index + 1) % 4;
+    pose.heading = directions[index];
 }
+
 
 void Executor:: InitIndex( Executor* &p ,const Pose &myPose){
     for(int i=0;i<4;i++){

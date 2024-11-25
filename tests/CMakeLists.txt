@@ -4,7 +4,8 @@ ADD_SUBDIRECTORY(googletest EXCLUDE_FROM_ALL)
 AUX_SOURCE_DIRECTORY(. SOURCE)
 ADD_EXECUTABLE(training_main ${SOURCE}
         ../include/Executor.h
-        Test.cpp
+        ExecutorTest.cpp
+        ../src/hello.cpp
 )
 TARGET_LINK_LIBRARIES(training_main training gtest_main)
 

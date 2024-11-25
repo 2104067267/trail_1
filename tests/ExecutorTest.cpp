@@ -2,6 +2,30 @@
 #include"Executor.h"
 namespace adas
 {
+TEST(ExecutorTest,should_return_facing_N21_given_command_is_RMRM_and_facing_is_N)
+{
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    executor->Execute("MRMMRLL");
+    const Pose target({2, 1, 'N'});
+    ASSERT_EQ(target, executor->Query());
+}
+
+TEST(ExecutorTest,should_return_facing_E1n2_given_command_is_RMRM_and_facing_is_N)
+{
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    executor->Execute("RMRMMLLR");
+    const Pose target({1, -2, 'E'});
+    ASSERT_EQ(target, executor->Query());
+}
+
+TEST(ExecutorTest,should_return_facing_N22_given_command_is_RMRM_and_facing_is_N)
+{
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    executor->Execute("MMRMMRLRLL");
+    const Pose target({2, 2, 'N'});
+    ASSERT_EQ(target, executor->Query());
+}
+
 TEST(ExecutorTest, should_return_facing_W_given_command_is_L_and_facing_is_N)
 {                                                                        //参数初始化列表
     std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
@@ -66,20 +90,5 @@ TEST(ExecutorTest,should_return_1_0_given_command_is_M_and_facing_is_E)
     ASSERT_EQ(target, executor->Query());
 }
 
-TEST(ExecutorTest,should_return_facing_E1n2_given_command_is_RMRM_and_facing_is_N)
-{
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
-    executor->Execute("RMRMML");
-    const Pose target({1, -2, 'E'});
-    ASSERT_EQ(target, executor->Query());
-}
-
-TEST(ExecutorTest,should_return_facing_S1n2_given_command_is_RMRM_and_facing_is_N)
-{
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
-    executor->Execute("MRMMR");
-    const Pose target({2, 1, 'S'});
-    ASSERT_EQ(target, executor->Query());
-}
 
 }

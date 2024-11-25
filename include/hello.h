@@ -1,3 +1,4 @@
-#pragma once
+#ifndef CPP_TRAINING_HELLO_H
+#define CPP_TRAINING_HELLO_H
 
-int test(void);
+#endif  // CPP_TRAINING_HELLO_H
