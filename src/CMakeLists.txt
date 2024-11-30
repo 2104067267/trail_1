@@ -11,6 +11,11 @@ ADD_LIBRARY(training ${SOURCE}
         ../include/Executor.h
         Executor.cpp
         ../include/hello.h
+        ../include/Executorlmpl.h
+        Executorlmpl.cpp
+        Executorlmpl.cpp
+        ../include/Pose.h
+        ../include/Pose.h
 )
 
 TARGET_INCLUDE_DIRECTORIES(training PUBLIC "${INCLUDE}")

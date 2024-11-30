@@ -3,95 +3,59 @@
 namespace adas
 {
 //"MRMMRLL"
-TEST(ExecutorTest,should_return_facing_N21_given_command_is_RMRM_and_facing_is_N)
+TEST(ExecutorTest, should_return_facing_N21_given_command_is_MRMMRLL_and_facing_is_N)
 {
     std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
-    executor->Execute("MRMMRLL");
-    const Pose target({2, 1, 'N'});
+    executor->Execute("MRMMRLLFL");
+    const Pose target({2, 2, 'W'});
     ASSERT_EQ(target, executor->Query());
 }
 
-//"RMRMMLLR"
-TEST(ExecutorTest,should_return_facing_E1n2_given_command_is_RMRM_and_facing_is_N)
-{
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
-    executor->Execute("RMRMMLLR");
-    const Pose target({1, -2, 'E'});
-    ASSERT_EQ(target, executor->Query());
-}
-
-//"MMRMMRLRLL"
-TEST(ExecutorTest,should_return_facing_N22_given_command_is_RMRM_and_facing_is_N)
-{
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
-    executor->Execute("MMRMMRLRLL");
-    const Pose target({2, 2, 'N'});
-    ASSERT_EQ(target, executor->Query());
-}
-
-TEST(ExecutorTest, should_return_facing_W_given_command_is_L_and_facing_is_N)
-{                                                                        //参数初始化列表
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
-    executor->Execute("L");
-    const Pose target({0, 0, 'W'});
-    ASSERT_EQ(target, executor->Query());
-}
-
-TEST(ExecutorTest,should_return_facing_E_given_command_is_R_and_facing_is_N)
-{
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
-    executor->Execute("R");
-    const Pose target({0, 0, 'E'});
-    ASSERT_EQ(target, executor->Query());
-}
-
-TEST(ExecutorTest, should_return_facing_N_given_command_is_L_and_facing_is_E)
+//"FMMML"
+TEST(ExecutorTest, should_return_facing_N70_given_command_is_FMML_and_facing_is_E)
 {
     std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'E'}));
-    executor->Execute("L");
-    const Pose target({0, 0,'N'});
+    executor->Execute("FMMML");
+    const Pose target({7, 0, 'N'});  // 加速状态下，前进6格，然后左转
     ASSERT_EQ(target, executor->Query());
 }
 
-TEST(ExecutorTest, should_return_facing_E_given_command_is_L_and_facing_is_S)
+//"FMRML"
+TEST(ExecutorTest, should_return_facing_N33_given_command_is_FMRML_and_facing_is_N)
+{
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    executor->Execute("FMRML");
+    const Pose target({3, 3, 'N'});  // 进入加速状态，前进2格然后右转，再前进2格左转，
+    ASSERT_EQ(target, executor->Query());
+}
+
+//FMRMLFM
+TEST(ExecutorTest, should_return_facing_Sn3n4_given_command_is_FMRML_and_facing_is_S)
 {
     std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'S'}));
-    executor->Execute("L");
-    const Pose target({0, 0,'E'});
+    executor->Execute("FMRMLFM");
+    const Pose target({-3, -4, 'S'});  // 进入加速状态，前进2格然后右转，再前进2格左转，取消加速状态，前进一格
     ASSERT_EQ(target, executor->Query());
 }
 
-TEST(ExecutorTest,should_return_facing_S_given_command_is_R_and_facing_is_W)
+//FMRMLFM
+TEST(ExecutorTest, should_return_facing_Nn3n4_given_command_is_FMRML_and_facing_is_S)
 {
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'W'}));
-    executor->Execute("R");
-    const Pose target({0, 0, 'N'});
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'S'}));
+    executor->Execute("FMRMLFMRR");
+    const Pose target({-3, -4, 'N'});  // 进入加速状态，前进2格然后右转，再前进2格左转，取消加速状态，前进一格
     ASSERT_EQ(target, executor->Query());
 }
 
-TEST(ExecutorTest,should_return_0_1_given_command_is_M_and_facing_is_N)
+//FMRMLFMFMR
+TEST(ExecutorTest, should_return_facing_Wn3n4_given_command_is_FMRML_and_facing_is_S)
 {
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
-    executor->Execute("M");
-    const Pose target({0, 1, 'N'});
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'S'}));
+    executor->Execute("FMRMLFMFMR");
+    const Pose target({-3, -7, 'W'});  // 进入加速状态，前进2格然后右转，再前进2格左转，取消加速状态，前进一格
     ASSERT_EQ(target, executor->Query());
 }
 
-TEST(ExecutorTest,should_return_n1_0_given_command_is_M_and_facing_is_W)
-{
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'W'}));
-    executor->Execute("M");
-    const Pose target({-1, 0, 'W'});
-    ASSERT_EQ(target, executor->Query());
-}
-
-TEST(ExecutorTest,should_return_1_0_given_command_is_M_and_facing_is_E)
-{
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'E'}));
-    executor->Execute("M");
-    const Pose target({1, 0, 'E'});
-    ASSERT_EQ(target, executor->Query());
-}
 
 
 }
