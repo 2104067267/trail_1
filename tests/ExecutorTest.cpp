@@ -38,7 +38,7 @@ TEST(ExecutorTest, should_return_facing_Sn3n4_given_command_is_FMRML_and_facing_
     ASSERT_EQ(target, executor->Query());
 }
 
-//FMRMLFM
+//FMRMLFMRR
 TEST(ExecutorTest, should_return_facing_Nn3n4_given_command_is_FMRML_and_facing_is_S)
 {
     std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'S'}));

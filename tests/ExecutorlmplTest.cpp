@@ -21,7 +21,6 @@ TEST(ExecutorlmplTest, should_return_facing_N70_given_command_is_FMML_and_facing
     ASSERT_EQ(target, executorlmpl->Query());
 }
 
-
 //"FMRML"
 TEST(ExecutorlmplTest, should_return_facing_N33_given_command_is_FMRML_and_facing_is_N)
 {
