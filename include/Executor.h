@@ -28,9 +28,10 @@ public:
     Pose pose{};
     int  index ;                  //下标指针
     int  speed ;                  //速度大小
+
     static std:: map<char, int> dir2index;  //方向转下标列表
-    static int   steps[4][2];            //位移基数
-    static char  directions[4];         //方向参数列表
+    static int   steps[4][2];               //位移基数
+    static char  directions[4];             //方向参数列表
 };
 
 }
