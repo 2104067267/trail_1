@@ -1,7 +1,7 @@
 #include"Executorlmpl.h"
 
 namespace adas{
-
+//执行指令
 void Executorlmpl::Execute(const std::string &commands)
 {
     for(const auto cmd: commands){
@@ -16,25 +16,26 @@ void Executorlmpl::Execute(const std::string &commands)
         if(cmder) cmder->DoOperate(*this);
     }
 }
-
+//前进指令类
 void Executorlmpl:: MoveCommand::DoOperate(Executorlmpl& executor) const noexcept {
     executor.MoveForward();
 }
-
+//右转指令类
 void Executorlmpl:: TurnRightCommand::DoOperate(Executorlmpl &executor) const noexcept
 {
     executor.Turn(1);
 }
-
+//左转指令类
 void Executorlmpl:: TurnLeftCommand::DoOperate(Executorlmpl &executor) const noexcept
 {
     executor.Turn(-1);
 }
+//加速指令类
 void Executorlmpl:: FastCommand::DoOperate(Executorlmpl &executor) const noexcept
 {
     executor.SpeedUp();
 }
-
+//带参构造
 Executorlmpl* Executorlmpl:: NewExecutorlmpl(const Pose &myPose){
     auto* p  = new Executorlmpl();
     p->index = dir2index[myPose.heading];
@@ -42,7 +43,6 @@ Executorlmpl* Executorlmpl:: NewExecutorlmpl(const Pose &myPose){
     p->speed = 1;
     return p;
 }
-
 //查询
 Pose Executorlmpl:: Query(){
     return pose;
@@ -66,7 +66,5 @@ void Executorlmpl:: MoveForward(bool isTurn){
 void Executorlmpl:: SpeedUp(){
     speed = (speed > 1) ? 1 : 2;
 }
-
-
 
 }

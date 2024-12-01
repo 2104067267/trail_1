@@ -3,7 +3,7 @@
 
 namespace adas{
 
-//"MRMMRLL"
+//"MRMMRLLFL"
 TEST(ExecutorlmplTest, should_return_facing_N21_given_command_is_MRMMRLL_and_facing_is_N)
 {
     std::unique_ptr<Executorlmpl> executorlmpl(Executorlmpl::NewExecutorlmpl({0, 0, 'N'}));
@@ -40,7 +40,7 @@ TEST(ExecutorTestlmpl, should_return_facing_Sn3n4_given_command_is_FMRML_and_fac
     ASSERT_EQ(target, executorlmpl->Query());
 }
 
-//FMRMLFM
+//FMRMLFMRR
 TEST(ExecutorlmplTest, should_return_facing_Nn3n4_given_command_is_FMRML_and_facing_is_S)
 {
     std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'S'}));

@@ -1,6 +1,6 @@
 #pragma once         //当编译器读取该文件时，会记录该文件已经被包含；从而下次再读取时，不会重新读取；防止头文件被多次包含，简化代码，避免重复定义和编译错误
 #include"Pose.h"
-#include <string>
+#include<string>
 #include<map>
 namespace adas       //namespace//：组织代码并防止命名冲突，使代码更易于管理和阅读
 {

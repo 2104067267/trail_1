@@ -25,7 +25,7 @@ private:
     class ICommand{
     public:
         virtual ~ICommand() = default;
-        virtual void DoOperate(Executorlmpl& excutor) const noexcept =0;
+        virtual void DoOperate(Executorlmpl& excutor) const noexcept = 0;
     };
 
     class MoveCommand final: public ICommand{
