@@ -13,6 +13,14 @@ ADD_EXECUTABLE(training_main ${SOURCE}
         ../include/Pose.h
         ../src/Pose.cpp
         ../src/Pose.cpp
+        ExecutorlmplTest.cpp
+        ExecutorlmplTest.cpp
+        ../include/Command.h
+        ../include/PoseHandler.h
+        ../src/PoseHandler.cpp
+        ../src/Command.cpp
+        ../include/Point.h
+        ../src/Point.cpp
 
 )
 TARGET_LINK_LIBRARIES(training_main training gtest_main)

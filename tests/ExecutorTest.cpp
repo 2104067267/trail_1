@@ -2,6 +2,34 @@
 #include"Executor.h"
 namespace adas
 {
+
+//"RMFB"
+TEST(ExecutorTest, should_return_facing_W40_given_command_is_MRMMRLL_and_facing_is_N)
+{
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    executor->Execute("RMFRRBFB");
+    const Pose target({5, -1, 'W'});
+    ASSERT_EQ(target, executor->Query());
+}
+
+//"RMFB"
+TEST(ExecutorTest, should_return_facing_S52_given_command_is_MRMMRLL_and_facing_is_N)
+{
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    executor->Execute("RMFMMRB");
+    const Pose target({6, 2, 'S'});
+    ASSERT_EQ(target, executor->Query());
+}
+
+//"RMFB"
+TEST(ExecutorTest, should_return_facing_En10_given_command_is_MRMMRLL_and_facing_is_N)
+{
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    executor->Execute("RMFB");
+    const Pose target({-1, 0, 'E'});
+    ASSERT_EQ(target, executor->Query());
+}
+
 //"MRMMRLL"
 TEST(ExecutorTest, should_return_facing_N21_given_command_is_MRMMRLL_and_facing_is_N)
 {

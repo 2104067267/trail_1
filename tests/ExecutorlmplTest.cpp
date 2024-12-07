@@ -3,6 +3,42 @@
 
 namespace adas{
 
+//"RMFB"
+TEST(ExecutorlmplTest, should_return_facing_W40_given_command_is_MRMMRLL_and_facing_is_N)
+{
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    executor->Execute("RMFRRBFB");
+    const Pose target({5, -1, 'W'});
+    ASSERT_EQ(target, executor->Query());
+}
+
+//"RMFMMRB"
+TEST(ExecutorlmplTest, should_return_facing_S62_given_command_is_MRMMRLL_and_facing_is_N)
+{
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    executor->Execute("RMFMMRB");
+    const Pose target({6, 2, 'S'});
+    ASSERT_EQ(target, executor->Query());
+}
+
+//"RMFMMRBFBL"
+TEST(ExecutorlmplTest, should_return_facing_E63_given_command_is_MRMMRLL_and_facing_is_N)
+{
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    executor->Execute("RMFMMRBFBL");
+    const Pose target({6, 3, 'E'});
+    ASSERT_EQ(target, executor->Query());
+}
+
+//"RMFMMRBBRFB"
+TEST(ExecutorlmplTest, should_return_facing_W73_given_command_is_MRMMRLL_and_facing_is_N)
+{
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    executor->Execute("RMFMMRBBRFB");
+    const Pose target({7, 3, 'W'});
+    ASSERT_EQ(target, executor->Query());
+}
+
 //"MRMMRLLFL"
 TEST(ExecutorlmplTest, should_return_facing_N21_given_command_is_MRMMRLL_and_facing_is_N)
 {

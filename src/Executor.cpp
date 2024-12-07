@@ -1,13 +1,6 @@
 #include"Executor.h"
 namespace adas {
 
-//方向列表初始化
-char Executor:: directions[4] = { 'N', 'E', 'S', 'W'};
-//方向到下标的映射表
-std:: map<char, int> Executor:: dir2index = { {'N',0}, {'E',1}, {'S',2}, {'W',3}};
-//位移基数
-int Executor:: steps[4][2] = { {0,1}, {1,0}, {0,-1}, {-1,0}};
-
 //带参构造
 Executor* Executor::NewExecutor(const Pose &myPose) {
     auto* p  = new Executor();
@@ -22,8 +15,9 @@ Executor:: Executor():pose({0,0,'N'}), index(0), speed(1){}
 void Executor:: Execute(const std::string& commands) {
     for(char command : commands) {
         switch (command) {
+        case 'B' : MoveBackward();     break;
         case 'F' : SpeedUp();          break;
-        case 'M' : MoveForward();      break;
+        case 'M' : MoveForward(false);      break;
         case 'L' : Turn(-1);       break;   //-1代表向左转
         case 'R' : Turn(1);        break;   //1代表向右转
         default  : std::cout << "command is illegal\n" << std::endl; break;
@@ -44,6 +38,16 @@ void Executor:: MoveForward(bool isTurn) { //默认值为false
     while(mySpeed > 0) {
         pose.x += steps[index][0];
         pose.y += steps[index][1];
+        mySpeed -= 1;
+    }
+}
+//后退
+void Executor:: MoveBackward(){
+    int mySpeed = speed;
+    int myIndex = (index + 2 ) % 4;
+    while(mySpeed > 0) {
+        pose.x += steps[myIndex][0];
+        pose.y += steps[myIndex][1];
         mySpeed -= 1;
     }
 }
