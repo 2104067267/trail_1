@@ -1,27 +1,29 @@
 #pragma once
-#include "Executor.h"
+#include "Point.h"
+#include "Pose.h"
 namespace adas{
 
-class PoseHandler final: Point{
+class PoseHandler : public Point{
 public:
-    explicit PoseHandler(const Pose& pose={0,0,'N'}) noexcept;
+    explicit PoseHandler(const Pose& pose={0,0,'N',0,1}) noexcept;
 
     PoseHandler(const PoseHandler&) = delete;
+    virtual ~PoseHandler() = default;
 
     PoseHandler& operator=(const PoseHandler&) = delete;
-    //执行指令
-    void Execute(const std::string& commands);
+     //执行指令
+    virtual void Execute(const std::string& commands);
     //查询
-    Pose Query();
+    virtual Pose Query();
     //转弯
-    void Turn(int dir);
+    virtual void Turn(int dir);
     //前进
-    void MoveForward(bool isTurn = false);
+    virtual void MoveForward(bool isTurn = false);
     //加速
-    void SpeedUp();
+    virtual void SpeedUp();
     //减速
-    void MoveBackward();
-private:
+    virtual void MoveBackward();
+
     Pose pose{} ;
     int  index  ;                  //下标指针
     int  speed  ;                  //速度大小

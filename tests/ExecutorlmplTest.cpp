@@ -6,7 +6,7 @@ namespace adas{
 //"RMFB"
 TEST(ExecutorlmplTest, should_return_facing_W40_given_command_is_MRMMRLL_and_facing_is_N)
 {
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    std::unique_ptr<Executorlmpl> executor(Executorlmpl::NewExecutorlmpl({0, 0, 'N'}));
     executor->Execute("RMFRRBFB");
     const Pose target({5, -1, 'W'});
     ASSERT_EQ(target, executor->Query());
@@ -15,7 +15,7 @@ TEST(ExecutorlmplTest, should_return_facing_W40_given_command_is_MRMMRLL_and_fac
 //"RMFMMRB"
 TEST(ExecutorlmplTest, should_return_facing_S62_given_command_is_MRMMRLL_and_facing_is_N)
 {
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    std::unique_ptr<Executorlmpl> executor(Executorlmpl::NewExecutorlmpl({0, 0, 'N'}));
     executor->Execute("RMFMMRB");
     const Pose target({6, 2, 'S'});
     ASSERT_EQ(target, executor->Query());
@@ -24,7 +24,7 @@ TEST(ExecutorlmplTest, should_return_facing_S62_given_command_is_MRMMRLL_and_fac
 //"RMFMMRBFBL"
 TEST(ExecutorlmplTest, should_return_facing_E63_given_command_is_MRMMRLL_and_facing_is_N)
 {
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    std::unique_ptr<Executorlmpl> executor(Executorlmpl::NewExecutorlmpl({0, 0, 'N'}));
     executor->Execute("RMFMMRBFBL");
     const Pose target({6, 3, 'E'});
     ASSERT_EQ(target, executor->Query());
@@ -33,7 +33,7 @@ TEST(ExecutorlmplTest, should_return_facing_E63_given_command_is_MRMMRLL_and_fac
 //"RMFMMRBBRFB"
 TEST(ExecutorlmplTest, should_return_facing_W73_given_command_is_MRMMRLL_and_facing_is_N)
 {
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+    std::unique_ptr<Executorlmpl> executor(Executorlmpl::NewExecutorlmpl({0, 0, 'N'}));
     executor->Execute("RMFMMRBBRFB");
     const Pose target({7, 3, 'W'});
     ASSERT_EQ(target, executor->Query());
@@ -78,7 +78,7 @@ TEST(ExecutorTestlmpl, should_return_facing_Sn3n4_given_command_is_FMRML_and_fac
 //FMRMLFMRR
 TEST(ExecutorlmplTest, should_return_facing_Nn3n4_given_command_is_FMRML_and_facing_is_S)
 {
-    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'S'}));
+    std::unique_ptr<Executorlmpl> executor(Executorlmpl::NewExecutorlmpl({0, 0, 'S'}));
     executor->Execute("FMRMLFMRR");
     const Pose target({-3, -4, 'N'});  // 进入加速状态，前进2格然后右转，再前进2格左转，取消加速状态，前进一格
     ASSERT_EQ(target, executor->Query());

@@ -26,7 +26,7 @@ Pose PoseHandler:: Query() {
 }
 //加速
 void PoseHandler:: SpeedUp() {
-    speed = (speed > 1) ? 1 : 2;
+    speed = pose.car ? speed : ( (speed > 1) ? 1 : 2 );
 }
 //前进
 void PoseHandler:: MoveForward(bool isTurn) { //默认值为false

@@ -21,6 +21,17 @@ ADD_EXECUTABLE(training_main ${SOURCE}
         ../src/Command.cpp
         ../include/Point.h
         ../src/Point.cpp
+        ../src/Pose.cpp
+        ../include/CreateMove.h
+        ../src/CreateMove.cpp
+        ../src/CreateTurn.cpp
+        ../include/CreateTurn.h
+        ../include/StaticPoseHandler.h
+        ../src/StaticPoseHandler.cpp
+        ../include/CreateBack.h
+        ../src/CreateBack.cpp
+        ../include/CreateFast.h
+        ../src/CreateFast.cpp
 
 )
 TARGET_LINK_LIBRARIES(training_main training gtest_main)
