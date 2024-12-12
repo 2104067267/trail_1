@@ -4,11 +4,11 @@ namespace adas{
 
 // 普通汽车的前进函数
 void CreateMove:: regularCarMove(Pose &myPose) {
-   int mySpeed = myPose.speed;
-   while(mySpeed){
-       MoveForward(myPose);
-   mySpeed--;
-   }
+    int mySpeed = myPose.speed;
+    while(mySpeed){
+        MoveForward(myPose);
+        mySpeed--;
+    }
 }
 
 // 跑车的前进函数

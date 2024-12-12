@@ -1,0 +1,48 @@
+
+
+
+1.简要介绍：
+CreateMove 、CreateBack、CreateTurn、CreateFast
+是 函数 工厂加工类， 根据车辆类型， 对子类PoseHandler中的 函数接口 进行选择实现
+
+StaticPoseHandler : Pose处理的 同一行为类，提高代码可读性 、质量
+
+PoseHandler： 中无具体函数实现 提供相同的函数接口，如：std::function<void(Pose &)>  MoveForward;
+              根据车辆类型 ，在初始化时，调用 父类CreateMove 、CreateBack、CreateTurn、CreateFast
+              的 createfunction 进行实现。 提高代码可读性合简洁性
+
+
+
+2.综合作业实现思路：
+分析：不同车俩类型，Move,Turn,Back的实现机制不同
+     但，函数调用意义相同。
+
+所以：联想到了之前学的 封装思想：抽象出来，归到一个类中。
+
+类似的： 将Move等函数不同实现 抽象到相应类， 根据车俩类型，对目的功能函数进行选择。
+        在子类 PoseHandler中，提供相同的功能 可调用对象 封装接口，
+        在初始化时，对功能封装接口进行初始化
+
+如：
+接口：
+    Pose Query();
+    //前进
+    std::function<void(Pose &)>  MoveForward;
+    //转弯
+    std::function<void(Pose &,int)> Turn;
+    //后退
+    std::function<void(Pose &)> BackForward;
+    //加速
+    std::function<void(Pose &)> Fast;
+
+    Pose pose{} ;
+
+初始化时 子类时：
+PoseHandler:: PoseHandler(const Pose& myPose) noexcept:
+      pose (myPose){
+    pose.index = dir2index[pose.heading];
+    MoveForward = createMoveFunction(myPose.car);
+    Fast =        createFastFunction(myPose.car);
+    BackForward = createBackFunction(myPose.car);
+    Turn =        createTurnFunction(myPose.car);
+}

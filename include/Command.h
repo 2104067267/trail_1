@@ -13,6 +13,7 @@ class MoveCommand final: public ICommand{
 public:
     void DoOperate(PoseHandler& poseHandler)const noexcept override;
 };
+
 //加速指令类
 class BackCommand final: public ICommand{
 public:
